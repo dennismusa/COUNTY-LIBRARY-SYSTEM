@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1644327130 source:c:\users\musa\documents\county library system\main.c
+	<stdio.h>
+	<stdlib.h>
+
