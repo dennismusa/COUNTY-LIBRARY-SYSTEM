@@ -10,6 +10,26 @@ C89 COMPILER
 #include <stdio.h>
 #include <stdlib.h>
 
+struct Patron{
+  char name[100];
+  char email[50];
+  char password[30];
+  int is_staff;
+};
+void add_patron(){
+  struct patron patron;
+  printf("Enter name:");
+  getschar();
+  gets(patron.name);
+  printf{"Enter email:"};
+  printf("patron.email:");
+  printf("Enter initial password:");
+  gets(patron.email);
+  printf("Enter 1 if staff 0 otherwise");
+  scanf("%d",&patron.is_staff);
+  printf("%s added\n",patron.name);
+}
+
 int menu()
 {   int action;
     printf("Select an action below\n");
@@ -28,7 +48,7 @@ int menu()
 void execute_action(int action){
     switch(action){
     case 1:
-        printf("adding a new patron\n");
+        add patron()
         break;
      case2:
         printf("list of all patron\n");
