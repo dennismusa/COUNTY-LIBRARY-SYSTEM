@@ -9,6 +9,7 @@ C89 COMPILER
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 
 struct Patron{
   char name[100];
@@ -16,21 +17,45 @@ struct Patron{
   char password[30];
   int is_staff;
 };
-void add_patron(){
-  struct patron patron;
-  printf("Enter name:");
-  getschar();
-  gets(patron.name);
-  printf{"Enter email:"};
-  printf("patron.email:");
-  printf("Enter initial password:");
-  gets(patron.email);
-  printf("Enter 1 if staff 0 otherwise");
-  scanf("%d",&patron.is_staff);
-  printf("%s added\n",patron.name);
-}
 
-int menu()
+
+// Function declarations
+void add_patron();
+int menu();
+void execute_action(int action);
+void save_patron(struct Patron patron);
+void view_patron();
+
+int main()
+
+{
+    while(1)  {
+    printf("COUNTY LIBRARY SYSTEM!\n");
+    printf("WELCOME DENNIS!\n");
+    Execute_action(menu());
+    printf("press any key to continue");
+    getch();
+    system("cls");
+
+    }
+    return 0;
+{
+
+  void add_patron() {
+    struct Patron patron;
+    printf("Enter name: ");
+    getchar();
+    gets(patron.name);
+    printf("Enter Email: ");
+    gets(patron.email);
+    printf("Enter initial password: ");
+    gets(patron.email);
+    printf("Enter 1 if staff 0 otherwise");
+    scanf("%d",&patron.is_staff);
+    save_patron(patron);
+    printf("%s added\n",patron.name);
+}
+(
 {   int action;
     printf("Select an action below\n");
     printf("1.Add new patron\n");
@@ -45,29 +70,43 @@ int menu()
 
     return action;
 
-void execute_action(int action){
-    switch(action){
+
+void execute_action(int action) {
+    switch(action) {
     case 1:
-        add patron()
+        add_patron();
         break;
-     case2:
-        printf("list of all patron\n");
+    case 2:
+        printf("list of all patrons\n");
         break;
-     case3:
-        printf("list of all book\n");
+    case 3:
+        printf("list of all books\n");
         break;
-     case4:
+    case 4:
         printf("adding a new book\n");
         break;
-     default:printf("invalid action.\n");
-
+    default: printf("Invalid action.\n");
     }
 }
-int main()
-{
-    printf("COUNTY LIBRARY SYSTEM!\n");
-    printf("WELCOME DENNIS!\n");
-    Execute_action(menu());
-
-    return 0;
+void save_patron(struct Patron patron) {
+    FILE *fp;
+    fp = fopen("patrons","a+b");
+    fwrite(&patron,sizeof(struct Patron),1,fp);
+    fclose(fp);
 }
+
+void view_patrons() {
+   FILE *fp;
+   struct Patron patron;
+   fp = fopen("patrons","r+b");
+   printf("%-30s%-30s%-10s\n","NAME","EMAIL","IS STAFF");
+   while(!feof(fp)){
+    fread(&patron,sizeof(struct Patron),1,fp);
+    printf("%-30s",patron.name);
+    printf("%-30s",patron.email);
+    printf("%-10d\n",patron.is_staff);
+   }
+
+}
+
+
